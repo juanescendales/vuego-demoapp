@@ -1,0 +1,21 @@
+version: '3.9'
+networks:
+  app-network:
+    driver: bridge
+services:
+  app:
+    container_name: vuego-demoapp-front-container
+    image: juanescendales/vuego-demoapp-front:latest
+    build: ./spa/
+    ports:
+      - 5000:80
+    networks:
+      - app-network
+  server:
+    container_name: vuego-demoapp-back-container
+    image: juanescendales/vuego-demoapp-back:latest
+    build: ./server/
+    ports:
+      - 4000:4000
+    networks:
+      - app-network
